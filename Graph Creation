@@ -1,0 +1,42 @@
+size=int(input("Enter number of vertices in the graph: "))
+graph=[]#adjacency matrix
+vertices=[]
+heuristics=[]
+#adding a new vertex
+def add_vertex(v, hr):
+    if v in vertices:
+        pass
+    else:
+        vertices.append(v)#adding the vertex to the list of vertices
+        heuristics.append(hr)#adding heuristic value of vertex to the list of heuristics
+        temp=[]#a kaali list to add to the adjacency matrix
+        for i in range(size):
+            temp+=[0]
+        graph.append(temp)#a new row with n zeroes is added to the adjacency matrix
+#adding sides
+def add_edge(v1,v2,edge):
+    #get index of each vertex from the list of vertices so u can find the index in adjacency matrix to be added
+    i1=vertices.index(v1)
+    i2=vertices.index(v2)
+    graph[i1][i2]=edge
+
+# Printing the graph
+def print_graph():
+    for i in range(size):
+        for j in range(size):
+            print(graph[i][j], end=" ")
+        print()
+
+for i in range(size):
+    print("Vertex no: ",i+1)
+    ver=input("Enter name of vertex: ")
+    heu=float(input("Enter heuristic value of the vertex: "))
+    add_vertex(ver,heu)
+
+for i in vertices:
+    for j in vertices:
+        if i!=j:
+            side=int(input(f"Enter cost of path between {i} and {j}:"))
+            add_edge(i,j,side)
+
+print_graph()
